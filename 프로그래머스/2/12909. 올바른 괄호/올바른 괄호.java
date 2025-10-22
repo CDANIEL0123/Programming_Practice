@@ -1,24 +1,26 @@
 class Solution {
     boolean solution(String s) {
         boolean answer = true;
+
+        int pointa = 1;
+        int pointb = 1;
         
-        int count = 0;
-        
-        for (int i=0; i<s.length(); i++) {
+        for (int i =0; i<s.length(); i++){
             
-            if(s.charAt(i) == '('){
-                count ++;
-            } else{
-                count --;
+            if(s.charAt(i) =='(') {
+                pointa ++;
+            }else{
+                pointb ++;
             }
             
-            if (count < 0){
+            if(pointb > pointa){
                 answer = false;
                 break;
             }
+            
         }
         
-        if ( count != 0) {
+        if(answer == true && pointa != pointb) {
             answer = false;
         }
         
