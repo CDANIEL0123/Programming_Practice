@@ -1,24 +1,23 @@
 class Solution {
     public String solution(String s) {
+        boolean bigger = true;
         String answer = "";
-        boolean abc = true;
         
-        for(int i=0; i<s.length(); i++){
-            
-            if(abc == true){
+        for(int i =0; i<s.length(); i++){
+                if(bigger == true){
                 answer += Character.toUpperCase(s.charAt(i));
-            }else{
-                answer +=  Character.toLowerCase(s.charAt(i));
+            } else{
+                answer += Character.toLowerCase(s.charAt(i));
             }
-            
-            if (s.charAt(i) == ' '){
-                abc = true;
-            } else if(i < s.length() -1 && Character.isDigit(s.charAt(i+1))){
-                abc = false;
-            } else {
-                abc = false;
+
+            if(s.charAt(i) == ' '){
+                bigger = true;
+            } else{
+                bigger = false;
             }
         }
+        
+        
         
         return answer;
     }
