@@ -3,18 +3,20 @@ class Solution {
         int answer = 0;
         
         for(int i =1; i<n+1; i++){
-            int sum = i;
-            int j = i;
-            while(sum < n) {
-                j++;
-                sum +=j;
-            }
+            int sum = 0;
             
-            if (sum == n) {
-                answer ++;
+            for(int j=i; j<n+1; j++){
+                sum+=j;
+                if(sum == n){
+                    answer+=1;
+                    break;
+                } else if(sum > n){
+                    break;
+                }
             }
-            
+   
         }
+    
         return answer;
     }
 }
