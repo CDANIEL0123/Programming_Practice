@@ -1,26 +1,29 @@
 class Solution {
     public int solution(int n) {
         String n_bi = Integer.toBinaryString(n);
-        int n_count =0;
+        int n_one_count = 0;
+        
         for(int i =0; i<n_bi.length(); i++){
-            if(n_bi.charAt(i)=='1'){
-                n_count++;
+            if(n_bi.charAt(i) == '1'){
+                n_one_count ++;
             }
         }
         
-        int large = n;
-        int l_count=0;
-        while (n_count != l_count){
-            large +=1;
-            l_count = 0;
-            String l_bi = Integer.toBinaryString(large);
-            for(int j = 0; j<l_bi.length(); j++){
-                if(l_bi.charAt(j)=='1'){
-                    l_count++;
+        while(true){
+            n++;
+            int n_larger_one_count = 0;
+            String larger_n_bi = Integer.toBinaryString(n);
+            for(int i=0; i<larger_n_bi.length(); i++){
+                if(larger_n_bi.charAt(i) == '1'){
+                    n_larger_one_count ++;
                 }
             }
+            
+            if(n_larger_one_count == n_one_count){
+                return n;
+            }
+            
+            
         }
-        
-        return large;
     }
 }
