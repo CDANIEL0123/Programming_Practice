@@ -3,34 +3,28 @@ import java.util.*;
 class Solution {
     public int solution(int k, int[] tangerine) {
         int answer = 0;
+        Arrays.sort(tangerine);
         Map<Integer, Integer> count = new HashMap<>();
         
-        for(int num : tangerine){
-            count.put(num, count.getOrDefault(num,0) +1);
-            // int num_count = 0;
-            // for(int i=0; i<tangerine.length; i++){
-            //     if(tangerine[i]==num){
-            //         num_count ++;
-            //     }
-            // }
-            // count.put(num,num_count);
+        
+        for(int i : tangerine){
+            count.put(i,count.getOrDefault(i,0) +1 );
         }
         
-        int[] only_count = new int[count.size()];
-        int idx = 0;
-        for(Map.Entry<Integer, Integer> entry : count.entrySet()){
-            only_count[idx] = entry.getValue();
-            idx++;
+        List<Integer> freq = new ArrayList<>(count.values());
+        Collections.sort(freq);
+        
+        int freq_length = freq.size();
+        
+        int sum = 0;
+        for(int i =freq_length-1; i >= 0; i--){
+            sum+= freq.get(i);
+            answer++;
+            if(sum>= k){
+                break;
+            }
         }
         
-        int allcount = 0;
-        Arrays.sort(only_count);
-        int idxx =only_count.length - 1;
-        while (allcount < k){
-            allcount += only_count[idxx];
-            answer ++;
-            idxx--;
-        }
         
         return answer;
     }
