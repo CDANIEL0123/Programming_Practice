@@ -1,44 +1,38 @@
-import java.util.HashMap;
 
 
 class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
-        HashMap<String, Integer> want_map = new HashMap<>();
+        int num_len = number.length;
         
-        for(int i =0; i<want.length; i++){
-            want_map.put(want[i],number[i]);
-        }
-        
-        
-        for(int i =0; i<discount.length -9; i++){
-            
-            boolean avail = true;
-            HashMap<String, Integer> dis_map = new HashMap<>();
-            for(int j=i; j<i+10;j++){
-                
-                if(dis_map.containsKey(discount[j])){
-                    dis_map.put(discount[j], dis_map.getOrDefault(discount[j],0)+1);
-                }else{
-                    dis_map.put(discount[j],1);
-                }
+        for(int start = 0; start+10<= discount.length; start++){
+            int[] num_clone = new int[num_len];
+            for(int i=0; i<num_len; i++){
+                num_clone[i] = number[i];
             }
-                
-                
-                for(String k : want_map.keySet()){
-                    if(dis_map.getOrDefault(k,0) < want_map.get(k)){
-                        avail = false;
-                        break;
+            
+            
+            for(int i =start; i<start+10; i++){
+                for(int j =0; j<want.length; j++){
+                    if(discount[i].equals(want[j])){
+                        num_clone[j] -=1;
                     }
                 }
-                
-                if(avail){
-                    answer++;
+        }
+            
+            boolean zero = true;
+        
+            for(int n :num_clone){
+                if(n != 0){
+                    zero = false;
+                    break;
                 }
-                
-            }
-        
-        
+                }
+            
+            if(zero){
+                answer ++;
+            } 
+        }
         return answer;
     }
 }
