@@ -2,39 +2,46 @@ import java.util.ArrayList;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        ArrayList<Integer> arr_answer = new ArrayList<>();
-        int[] pro_day = new int[progresses.length];
+        int pointer = 0;
+        int[] answer = new int[progresses.length];
         
-
-        for(int i =0; i<progresses.length; i++){
-            pro_day[i] = (int)Math.ceil((double)(100 - progresses[i]) / speeds[i]) ;
-        }
+        for(int i =0; i<speeds.length; i++){
+            if((100-progresses[i])%speeds[i] == 0){
+                answer [i] = (100-progresses[i])/speeds[i];
+            }else{
+                answer [i] = (100-progresses[i])/speeds[i] +1;
+            }
+        } // [7,3,11]
         
-        int current = pro_day[0];
-        int counter = 0;
-        for(int j=0; j<pro_day.length; j++){
-            
-           if(pro_day[j] > current){
-                arr_answer.add(counter) ; 
-                current = pro_day[j];
-                counter = 1;
-            }
-            
-            else{
-                counter +=1;
-            }
-            
-            if(j==pro_day.length-1 && counter>0){
-                arr_answer.add(counter);
+        int index = 0;
+        int dungi=0;
+        for(int i =0; i<answer.length; i++){
+            if(answer[i] > index){
+                index = answer[i];
+                int count = 0;
+                dungi++;
             }
         }
+        int[] real_answer = new int[dungi];
         
-        int[] answer = new int[arr_answer.size()];
-        for(int i=0; i<arr_answer.size(); i++){
-            answer[i] = arr_answer.get(i);
+        int dungi_num = 0;
+        int indexx = answer[0];
+        real_answer[dungi_num]++;
+        //5 10 1 1 20 1
+        
+        for(int j = 1; j<answer.length; j++){
+            if(answer[j] <= indexx){
+                real_answer[dungi_num] ++;
+            }else{
+                dungi_num++;
+                indexx = answer[j];
+                real_answer[dungi_num] ++;
+            }
         }
         
         
-        return answer;
+        
+        return real_answer;
+        
     }
 }
