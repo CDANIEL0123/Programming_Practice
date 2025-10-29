@@ -16,8 +16,10 @@ class Solution {
             }
             
         }else{
-            int plus = dfs(numbers,target,idx+1,sum+numbers[idx]);
-            int minus = dfs(numbers,target,idx+1,sum-numbers[idx]);
+            int plus  = dfs(numbers,target,idx+1,sum + numbers[idx]); 
+            //이 분기에서 +로 갈경우 타겟이랑 일치하면 1됨
+            int minus = dfs(numbers,target,idx+1,sum - numbers[idx]); 
+            //이 분기에서 -로 갈경우 타겟이랑 일치하면 1됨
             return plus + minus;
         }
     }
